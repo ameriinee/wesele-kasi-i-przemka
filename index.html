@@ -1,14 +1,404 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasia i Przemek - Nasz Ślub</title>
+    
+    <!-- Dołączenie Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Dołączenie czcionek Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Ikony FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wedding-green': '#A8D5BA',
+                        'wedding-dark': '#2C3E50',
+                        'wedding-light': '#F9FBF9',
+                        'wedding-accent': '#8AB89E',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            /* Zdjęcie tła głównego (z Unsplash dla klimatu) */
+            background-image: url('./background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .icon-box {
+            transition: transform 0.3s ease;
+        }
+        .icon-box:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<p>Przykład strony dla kodu QR</p>
-<body>
+<body class="font-sans text-wedding-dark bg-wedding-light">
 
+    <!-- HERO -->
+    <header class="relative h-screen w-full hero-bg">
+        <div class="overlay absolute inset-0 flex flex-col items-center justify-center text-white text-center px-4">
+            <h1 class="font-serif text-5xl md:text-7xl mb-4 drop-shadow-lg italic">Kasia i Przemek</h1>
+            <p class="text-xl md:text-3xl mb-12 tracking-widest uppercase font-light drop-shadow-md">4 czerwca 2026</p>
+            <div id="countdown" class="flex flex-wrap justify-center gap-4 md:gap-8 mb-16"></div>
+        </div>
 
+        <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur shadow-md py-4 z-20 hidden md:block">
+            <nav class="container mx-auto">
+                <ul class="flex justify-center space-x-8 text-sm uppercase tracking-wide font-bold text-gray-600">
+                    <li><a href="#historia" class="hover:text-wedding-green transition">Historia</a></li>
+                    <li><a href="#slub" class="hover:text-wedding-green transition">Ślub</a></li>
+                    <li><a href="#wesele" class="hover:text-wedding-green transition">Wesele</a></li>
+                    <li><a href="#organizacyjne" class="hover:text-wedding-green transition">Sprawy organizacyjne</a></li>
+                    <li><a href="#poprawiny" class="hover:text-wedding-green transition">Poprawiny</a></li>
+                    <li><a href="#obecnosc" class="hover:text-wedding-green transition">Obecność</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Nawigacja -->
+    <div class="md:hidden bg-white py-4 shadow-md sticky top-0 z-50 text-center flex justify-around items-center px-4">
+        <span class="text-wedding-green font-serif text-xl font-bold">K & P</span>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-600 focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed w-full z-40 top-[60px]">
+        <ul class="flex flex-col text-center py-4 space-y-4">
+            <li><a href="#historia" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Historia</a></li>
+            <li><a href="#slub" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Ślub</a></li>
+            <li><a href="#wesele" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Wesele</a></li>
+            <li><a href="#organizacyjne" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Sprawy organizacyjne</a></li>
+            <li><a href="#poprawiny" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Poprawiny</a></li>
+            <li><a href="#obecnosc" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Obecność</a></li>
+        </ul>
+    </div>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="min-h-[75vh] flex flex-col md:flex-row w-full items-center py-10 md:py-0">
+        <div class="w-full md:w-[60%] bg-transparent p-6 md:p-20 flex flex-col justify-center items-start order-2 md:order-1">
+            <span class="text-wedding-green uppercase tracking-widest font-bold mb-2">Nasza Historia</span>
+            <h2 class="font-serif text-4xl md:text-5xl mb-6 text-gray-800">Krótka historia jednej miłości</h2>
+            <div class="text-gray-600 leading-relaxed text-lg space-y-4 text-justify">
+                <p>Poznali się w liceum, w klasie o profilu humanistycznym, gdzie razem interpretowali wiersze, pisali eseje i czytali powieści. Spędzali długie przerwy na rozmowach z grupką przyjaciół. Często wspólnie po lekcjach chodzili na autobus. Byli częścią paczki, która trzymała się razem – wspólne spotkania, wyjazdy i imprezy.</p>
+                <p>Po maturze ich drogi się rozeszły – ona wyjechała na studia do Opola, on do Warszawy. Kontakt się rozluźnił, prawie zanikł. Aż do pewnego spotkania po dwóch latach. Zorganizowali małe przyjacielskie spotkanie u niego w domu – śmiech, wspomnienia i malutka iskierka, która pojawiła się niespodziewanie, a jednak jakby czekała od dawna.</p>
+                <p>Zaczęli rozmawiać i spotykać się na odległość – weekendowe podróże między Opolem a Warszawą stały się ich rytuałem. Każde spotkanie było świętem, a każde pożegnanie – obietnicą następnego. Pierwsze wspólne wakacje spędzili na wędrówkach górskich rozpoczynając zdobywanie kolejnych szczytów Korony Gór Polski – dosłownie i w przenośni.</p>
+                <p>Kiedy ona w 2023 roku przeniosła się na studia do Warszawy, wybierała mieszkanie jak najbliżej niego, a on codziennie po zajęciach przyjeżdżał do niej, tak aby wreszcie mogli być razem.</p>
+                <p>28 lipca 2024 roku podczas wspólnych wakacji na Cyprze nad brzegiem morza o zachodzie słońca uklęknął przed nią i poprosił ją o rękę. Odpowiedź była tylko jedna – tak.</p>
+                <p>Po studiach zamieszkali razem w Warszawie, planując wspólną przyszłość, ślub i wszystkie małe codzienności, które złożyły się na ich wielką miłość.</p>
+                <p class="font-serif italic text-gray-700 font-bold mt-4">Najpiękniejszym symbolem ich więzi pozostaje fakt, że urodzili się tego samego dnia – jakby los od samego początku wiedział, że są sobie pisani.</p>
+            </div>
+        </div>
+        <div class="w-full md:w-[40%] h-auto p-10 md:p-0 order-1 md:order-2 flex justify-center items-center">
+            <img src="./background.jpg" alt="Kasia i Przemek" class="w-64 h-64 md:w-96 md:h-96 rounded-full object-cover border-8 border-wedding-green shadow-2xl">
+        </div>
+    </section>
+
+    <!-- ŚLUB (CEREMONIA) -->
+    <section id="slub" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="font-serif text-4xl md:text-5xl text-center mb-16 text-gray-800">Ceremonia Ślubna</h2>
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden flex flex-col md:flex-row">
+                <div class="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center space-y-10 bg-white relative">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-wedding-green"></div>
+                    <div class="mb-2">
+                        <p class="text-xl text-center md:text-left font-serif italic text-gray-700">Sakrament zawarcia Związku Małżeńskiego odbędzie się:</p>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-green-50 flex items-center justify-center text-wedding-green mr-6">
+                            <i class="far fa-calendar-alt text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Data</h3>
+                            <p class="text-gray-600 text-lg">04 czerwca 2026 r.</p>
+                            <p class="text-wedding-green font-semibold">w Uroczystość Bożego Ciała</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-green-50 flex items-center justify-center text-wedding-green mr-6">
+                            <i class="far fa-clock text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Godzina</h3>
+                            <p class="text-gray-600 text-lg">15:00</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-16 h-16 rounded-full bg-green-50 flex items-center justify-center text-wedding-green mr-6">
+                            <i class="fas fa-church text-3xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Miejsce</h3>
+                            <p class="text-gray-600 text-lg">w kościele pw.&nbsp;Opatrzności Bożej</p>
+                            <p class="text-gray-500">w Strzelcach Wielkich</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 h-96 md:h-auto min-h-[400px] bg-gray-200 relative">
+                    <iframe width="100%" height="100%" style="border:0; filter: grayscale(20%);" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Ko%C5%9Bci%C3%B3%C5%82+pw.+Opatrzno%C5%9Bci+Bo%C5%BCej+Strzelce+Wielkie&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                    <a href="https://maps.app.goo.gl/rDR1V8wbWBmLctw77" target="_blank" class="absolute bottom-6 right-6 bg-white text-gray-800 px-6 py-3 rounded-full shadow-lg font-bold hover:bg-wedding-green hover:text-white transition flex items-center gap-2">
+                        <i class="fas fa-location-arrow"></i> Nawiguj
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WESELE -->
+    <section id="wesele" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="font-serif text-4xl md:text-5xl text-center mb-16 text-gray-800">Wesele</h2>
+            <div class="flex flex-col md:flex-row bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+                <div class="w-full md:w-1/2 p-10 md:p-16 flex flex-col justify-center items-center text-center space-y-6">
+                    <p class="text-xl text-gray-700 italic">Po ceremonii zaślubin zapraszamy na przyjęcie weselne</p>
+                    <h3 class="text-2xl md:text-3xl font-bold font-serif text-wedding-dark">Sala przyjęć okolicznościowych<br>„Dwa Stawy”</h3>
+                    <p class="text-lg text-gray-600">ul. Brzeźnicka 1<br>42-125 Łobodno</p>
+                    <a href="https://maps.app.goo.gl/b1Q39zZz1h4AQPNu9" target="_blank" class="inline-block bg-wedding-green text-white px-8 py-3 rounded-full shadow-md hover:bg-wedding-accent transition font-bold mt-4">
+                        <i class="fas fa-map-marked-alt mr-2"></i> Zobacz dojazd
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 min-h-[400px]">
+                    <div class="h-1/2 w-full relative">
+                        <img src="./restaurant.png" alt="Sala Dwa Stawy" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/10"></div>
+                    </div>
+                    <div class="h-1/2 w-full">
+                         <iframe width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen src="https://maps.google.com/maps?q=Dwa+Stawy+%C5%81obodno&t=&z=14&ie=UTF8&iwloc=&output=embed"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPRAWY ORGANIZACYJNE -->
+    <section id="organizacyjne" class="py-20 bg-wedding-light">
+        <div class="container mx-auto px-4">
+            <h2 class="font-serif text-4xl md:text-5xl text-center mb-16 text-gray-800">Sprawy Organizacyjne</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="icon-box bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="text-wedding-green text-5xl mb-4"><i class="fas fa-car"></i></div>
+                    <h3 class="font-bold text-xl mb-4 uppercase">Dojazd</h3>
+                    <p class="text-gray-600">Ze względu na trwające remonty dróg DW 491 i 492 prosimy o wcześniejsze przeanalizowanie trasy dojazdu i ewentualne wybranie alternatywnej drogi.</p>
+                </div>
+                <div class="icon-box bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="text-wedding-green text-5xl mb-4"><i class="fas fa-tshirt"></i></div>
+                    <h3 class="font-bold text-xl mb-4 uppercase">Dresscode</h3>
+                    <p class="text-gray-600">Na naszym weselu nie obowiązuje wymagany styl ubioru. Prosimy jedynie o unikanie białych kolorów, które są zarezerwowane dla naszego szczególnego dnia.</p>
+                </div>
+                <div class="icon-box bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="text-wedding-green text-5xl mb-4"><i class="fas fa-child"></i></div>
+                    <h3 class="font-bold text-xl mb-4 uppercase">Dzieci</h3>
+                    <p class="text-gray-600">Wiemy, że kochacie swoje pociechy najbardziej na świecie, ale tego wieczoru pozwólcie sobie na odrobinę beztroski!</p>
+                </div>
+                <div class="icon-box bg-white p-8 rounded-xl shadow-md text-center md:col-span-1 lg:col-span-1">
+                    <div class="text-wedding-green text-5xl mb-4"><i class="fas fa-gift"></i></div>
+                    <h3 class="font-bold text-xl mb-4 uppercase">Prezenty</h3>
+                    <p class="text-gray-600">Pragniemy podkreślić, że nie oczekujemy prezentów materialnych. Zamiast tego, będziemy wdzięczni za życzenia i ewentualny datek na nasze wspólne gniazdko. Wasza obecność jest dla nas najważniejsza.</p>
+                </div>
+                <div class="icon-box bg-white p-8 rounded-xl shadow-md text-center md:col-span-2 lg:col-span-2">
+                    <div class="text-wedding-green text-5xl mb-4"><i class="fas fa-camera-retro"></i></div>
+                    <h3 class="font-bold text-xl mb-4 uppercase">Zdjęcia</h3>
+                    <p class="text-gray-600 mb-4">Chociaż będziemy mieli obecnego profesjonalnego fotografa, serdecznie zachęcamy Cię do dzielenia się własnymi wspomnieniami w naszym wspólnym albumie na dysku Google.</p>
+                    <p class="text-sm text-gray-500 italic">Ujęcia z perspektywy gościa dodadzą magii temu wyjątkowemu dniu!<br>(Link do dysku zostanie udostępniony w dniu wesela.)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPRAWINY -->
+    <section id="poprawiny" class="py-20 bg-wedding-green">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl mb-8 text-wedding-dark">Poprawiny</h2>
+            <div class="max-w-3xl mx-auto space-y-6 text-lg md:text-xl font-light text-wedding-dark">
+                <p>Z radością informujemy, że świętowanie naszego ślubu nie kończy się na dniu wesela!</p>
+                <div class="bg-white/40 backdrop-blur-sm p-8 rounded-lg border border-white/50 my-8 shadow-sm">
+                    <p class="font-bold mb-2">Serdecznie zapraszamy wszystkich Gości weselnych wraz z dziećmi na poprawiny, które odbędą się</p>
+                    <p class="text-3xl font-serif font-bold my-4">następnego dnia (w piątek) o godzinie 15:00</p>
+                </div>
+                <p class="font-medium">Niech to popołudnie będzie pełne radości i wspólnego świętowania w gronie najbliższych.</p>
+                <p class="font-serif italic text-2xl mt-8">Z niecierpliwością czekamy na ponowne spotkanie!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBECNOŚĆ -->
+    <section id="obecnosc" class="py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-serif text-4xl md:text-5xl mb-8 text-gray-800">Obecność</h2>
+            <div class="max-w-2xl mx-auto mb-12">
+                <p class="text-xl text-gray-600 mb-4">Daj znać, że będziesz z nami!</p>
+                <p class="text-gray-600 mb-8">Chcemy, abyście byli z nami w ten wyjątkowy dzień.</p>
+                <div class="bg-gray-50 border-l-4 border-wedding-green p-6 text-left inline-block mx-auto shadow-sm">
+                    <p class="text-lg text-gray-800 font-bold">Prosimy o potwierdzenie swojego przybycia do <span class="text-wedding-green">20 kwietnia 2025 r.</span></p>
+                </div>
+                <br>
+                <br>
+                <p class="text-gray-600 mt-6 text-lg">Możesz potwierdzić obecność wypełniając <a href="#" class="text-wedding-green font-bold underline hover:text-wedding-dark transition">formularz</a>.</p>
+                <br>
+                <p class="text-gray-600 mt-8 italic">Z góry dziękujemy i z niecierpliwością czekamy na wspólną celebrację!</p>
+                <p class="font-serif text-2xl text-wedding-green mt-4">Z miłością, Kasia i Przemek</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOM -->
+    <section id="dom" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-serif text-3xl md:text-4xl text-gray-800 mb-10">Bądź z nami od samego początku!</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
+                <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full mx-auto transform hover:scale-105 transition duration-300">
+                    <div class="text-wedding-green text-4xl mb-4"><i class="fas fa-home"></i></div>
+                    <h3 class="font-serif text-2xl font-bold mb-2">Dom Pani Młodej</h3>
+                    <p class="text-gray-600 mb-1 font-semibold">Strzelce Wielkie</p>
+                    <p class="text-wedding-green font-bold text-xl mb-4">godz. 14:30</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=ulica+Piastowska+Strzelce+Wielkie" target="_blank" class="text-sm border border-wedding-green text-wedding-green px-4 py-2 rounded-full hover:bg-wedding-green hover:text-white transition">
+                        <i class="fas fa-map-marker-alt"></i> Zobacz mapę
+                    </a>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full mx-auto transform hover:scale-105 transition duration-300">
+                    <div class="text-wedding-green text-4xl mb-4"><i class="fas fa-home"></i></div>
+                    <h3 class="font-serif text-2xl font-bold mb-2">Dom Pana Młodego</h3>
+                    <p class="text-gray-600 mb-1 font-semibold">Izbiska</p>
+                    <p class="text-wedding-green font-bold text-xl mb-4">godz. 13:30</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Izbiska" target="_blank" class="text-sm border border-wedding-green text-wedding-green px-4 py-2 rounded-full hover:bg-wedding-green hover:text-white transition">
+                        <i class="fas fa-map-marker-alt"></i> Zobacz mapę
+                    </a>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 mt-6 italic">Po dokładny adres prosimy zgłosić się bezpośrednio do nas &nbsp<i class="far fa-smile"></i></p>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-serif text-3xl text-gray-800 mb-10">Kontakt do nas</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
+                <!-- Kasia -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-40 h-40 group-hover:scale-105 transition duration-300 flex items-center justify-center">
+                        <div class="w-full h-full" 
+                             style="background-image: url('./icon1.png'); 
+                                    background-position: center; 
+                                    background-size: 100%; 
+                                    background-repeat: no-repeat;
+                                    filter: invert(77%) sepia(26%) saturate(668%) hue-rotate(86deg) brightness(93%) contrast(88%);">
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-1 mt-4">Kasia</h3>
+                    <a href="tel:539913602" class="text-xl text-gray-600 hover:text-wedding-green transition font-bold flex items-center gap-2">
+                        <i class="fas fa-phone-alt text-sm opacity-50"></i> 539 913 602
+                    </a>
+                </div>
+                
+                <!-- Przemek -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-40 h-40 group-hover:scale-105 transition duration-300 flex items-center justify-center">
+                        <div class="w-full h-full"
+                             style="background-image: url('./icon2.png'); 
+                                    background-position: center; 
+                                    background-size: 100%; 
+                                    background-repeat: no-repeat;
+                                    filter: invert(77%) sepia(26%) saturate(668%) hue-rotate(86deg) brightness(93%) contrast(88%);">
+                        </div>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-1 mt-4">Przemek</h3>
+                    <a href="tel:575281122" class="text-xl text-gray-600 hover:text-wedding-green transition font-bold flex items-center gap-2">
+                        <i class="fas fa-phone-alt text-sm opacity-50"></i> 575 281 122
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STOPKA -->
+    <footer class="bg-wedding-green text-wedding-dark py-10 text-center">
+        <p class="font-serif italic text-2xl mb-4 font-bold">Kasia i Przemek</p>
+        <p class="text-sm opacity-80">Do zobaczenia na ślubie!</p>
+    </footer>
+
+    <!-- SKRYPT JS -->
+    <script>
+        const weddingDate = new Date(2026, 5, 4, 15, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = '<div class="text-3xl font-bold">JUŻ PO ŚLUBIE!</div>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const timeUnits = [
+                { value: days, label: "Dni" },
+                { value: hours, label: "Godziny" },
+                { value: minutes, label: "Minuty" },
+                { value: seconds, label: "Sekundy" }
+            ];
+
+            let html = '';
+            timeUnits.forEach(unit => {
+                html += `
+                    <div class="countdown-item flex flex-col items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-lg text-white shadow-lg">
+                        <span class="text-3xl md:text-5xl font-bold font-serif">${unit.value}</span>
+                        <span class="text-xs md:text-sm uppercase tracking-wider mt-1 opacity-90">${unit.label}</span>
+                    </div>
+                `;
+            });
+            document.getElementById("countdown").innerHTML = html;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
