@@ -39,7 +39,7 @@
         }
         
         .hero-bg {
-            /* Zdjęcie tła głównego (z Unsplash dla klimatu) */
+            /* Zdjęcie tła głównego */
             background-image: url('./background.jpg'); 
             background-size: cover;
             background-position: center;
@@ -61,6 +61,15 @@
         }
         .icon-box:hover {
             transform: translateY(-5px);
+        }
+
+        /* Ukrywanie paska przewijania dla estetyki w nawigacji mobilnej */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
     </style>
 </head>
@@ -88,22 +97,21 @@
         </div>
     </header>
 
-    <!-- Nawigacja -->
-    <div class="md:hidden bg-white py-4 shadow-md sticky top-0 z-50 text-center flex justify-around items-center px-4">
-        <span class="text-wedding-green font-serif text-xl font-bold">K & P</span>
-        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-gray-600 focus:outline-none">
-            <i class="fas fa-bars text-2xl"></i>
-        </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed w-full z-40 top-[60px]">
-        <ul class="flex flex-col text-center py-4 space-y-4">
-            <li><a href="#historia" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Historia</a></li>
-            <li><a href="#slub" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Ślub</a></li>
-            <li><a href="#wesele" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Wesele</a></li>
-            <li><a href="#organizacyjne" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Sprawy organizacyjne</a></li>
-            <li><a href="#poprawiny" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Poprawiny</a></li>
-            <li><a href="#obecnosc" class="block text-gray-700 hover:text-wedding-green" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Obecność</a></li>
-        </ul>
+    <!-- Nawigacja mobilna -->
+    <div class="md:hidden bg-white/95 backdrop-blur shadow-md sticky top-0 z-50 w-full">
+        <div class="flex items-center px-4 py-3">
+            <span class="text-wedding-green font-serif text-xl font-bold mr-4 flex-shrink-0">K & P</span>
+            <nav class="flex-grow overflow-hidden">
+                <ul class="flex space-x-6 text-xs uppercase tracking-wide font-bold text-gray-600 overflow-x-auto no-scrollbar whitespace-nowrap items-center h-full">
+                    <li><a href="#historia" class="hover:text-wedding-green transition">Historia</a></li>
+                    <li><a href="#slub" class="hover:text-wedding-green transition">Ślub</a></li>
+                    <li><a href="#wesele" class="hover:text-wedding-green transition">Wesele</a></li>
+                    <li><a href="#organizacyjne" class="hover:text-wedding-green transition">Organizacyjne</a></li>
+                    <li><a href="#poprawiny" class="hover:text-wedding-green transition">Poprawiny</a></li>
+                    <li><a href="#obecnosc" class="hover:text-wedding-green transition">Obecność</a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
 
     <!-- HISTORIA -->
