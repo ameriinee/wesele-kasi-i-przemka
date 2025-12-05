@@ -42,7 +42,13 @@
             background-image: url('./background.jpg'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: scroll; 
+        }
+
+        @media (min-width: 768px) {
+            .hero-bg {
+                background-attachment: fixed;
+            }
         }
         
         .overlay {
@@ -66,8 +72,8 @@
             display: none;
         }
         .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
         }
     </style>
 </head>
@@ -133,7 +139,7 @@
         </div>
     </section>
 
-    <!-- ŚLUB (CEREMONIA) -->
+    <!-- ŚLUB -->
     <section id="slub" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="font-serif text-4xl md:text-5xl text-center mb-16 text-gray-800">Ceremonia Ślubna</h2>
